@@ -9,7 +9,8 @@ this.addEventListener("install", (event) => {
                 '/manifest.json',
                 '/favicon.ico',
                 '/index.html',
-                '/'
+                '/',
+                '/about'
             ])
         })
     )
@@ -17,11 +18,15 @@ this.addEventListener("install", (event) => {
 
 //fetch cache files
 this.addEventListener("fetch", (event) => {
-    event.respondWith(
-        caches.match(event.request).then((res) => {
-            if (res) {
-                return res
-            }
-        })
-    )
+    if (!navigator.onLine) {
+        event.respondWith(
+            caches.match(event.request).then((res) => {
+                if (res) {
+                    return res
+                }
+                let requestUrl = event.request.clone();
+                fetch(requestUrl)
+            })
+        )
+    }
 })
