@@ -7,7 +7,7 @@ const Home = () => {
         <>
             <Navigation />
             <h1>Home Page</h1>
-            <img src="./logo192.png" />
+            <img src="./logo192.png" alt="logo" />
         </>
     )
 }
